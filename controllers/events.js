@@ -5,10 +5,18 @@ var getAllEvents = () => {
 
 };
 
-var addEvent = () => {
-
+var addEvent = async (req, resp, next) => {
+	const { id, type, actor_id } = req.body;
+	//console.log(req.body)
+	try {
+		await events.create({ id, type, actor_id })
+		resp.statusCode = 201
+	} catch (e) {
+		console.log(e.message)
+		resp.statusCode = 400
+	}
+	resp.end()
 };
-
 
 var getByActor = () => {
 
