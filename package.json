@@ -6,25 +6,36 @@
     "prestart": "npm install",
     "start": "node ./bin/www",
     "pretest": "npm install",
-    "test": "./node_modules/.bin/mocha test"
+    "test": "./node_modules/.bin/mocha test/index",
+    "test:dev": "./node_modules/.bin/mocha test/index",
+    "nodemon": "nodemon app.js"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.19.0",
     "chai": "^4.1.1",
     "chai-as-promised": "^7.1.1",
     "chai-http": "^3.0.0",
+    "clean-css": "^4.1.11",
+    "constantinople": "^4.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
-    "express": "~4.15.2",
-    "jade": "~1.11.0",
+    "express": "^4.17.1",
+    "jade": "^1.11.0",
     "jsonfile": "^3.0.1",
     "lodash": "^4.17.4",
-    "mocha": "^3.5.0",
+    "mocha": "^6.2.0",
     "mocha-junit-reporter": "^1.13.0",
     "mocha-multi-reporters": "^1.1.4",
-    "morgan": "~1.8.1",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.7.0",
+    "nodemon": "^1.19.2",
+    "sequelize": "^5.19.0",
+    "sequelize-cli": "^5.5.1",
     "serve-favicon": "~2.4.2",
-    "sqlite3": "^3.1.9",
-    "bluebird": "^3.5.0"
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }

@@ -1,0 +1,29 @@
+{
+  "dev": {
+    "username": "root",
+    "password": "ndifreke1",
+    "database": "vanhack",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "logging": false
+  },
+
+  "test": {
+    "username": "root",
+    "password": "ndifreke1",
+    "database": "vanhack",
+    "host": "127.0.0.1",
+    "dialect": "sqlite",
+    "storage": "./sqlite.db",
+    "logging": false
+  },
+  
+  "prod": {
+    "username": "root",
+    "password": null,
+    "database": "vanhack", 
+    "host": "127.0.0.1", 
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
