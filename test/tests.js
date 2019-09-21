@@ -16,16 +16,20 @@ const testFolder = './test/data';
 let testCaseNames = fs.readFileSync(dir + 'description.txt', 'utf8').toString().split('\n');
 
 beforeEach(async function () {
-  await sequelize.sync({ force: true })
+	await sequelize.sync({ force: true })
 })
 
-describe('git_test ', function() {
+describe('git_test ', function () {
+
 	this.timeout(120*1000);
+	// setTimeout(() => {
+	// 	process.exit(0)
+	// }, 10000)
 
 	let id = 0;
 	fs.readdirSync(testFolder).sort().forEach(file => {
 		if (file[0] != '.' && file != 'description.txt') {
-	
+
 			it(testCaseNames[id], (done) => {
 				let i = 0;
 				let event = [];
@@ -33,11 +37,11 @@ describe('git_test ', function() {
 					i += 1;
 					if (line) {
 						event.push(line);
-					}	
+					}
 				});
 				Promise.mapSeries(event, (e) => {
 					let eve = JSON.parse(e);
-					if(eve.request.method == "DELETE") {
+					if (eve.request.method == "DELETE") {
 						return chai.request(server)
 							.delete(eve.request.url)
 							.then((res) => {
@@ -55,28 +59,28 @@ describe('git_test ', function() {
 					// 			return err;
 					// 		});
 					// }
-					// if (eve.request.method == "POST") {
-					// 	return chai.request(server)
-					// 		.post(eve.request.url)
-					// 		.set(eve.request.headers)
-					// 		.send(eve.request.body)
-					// 		.then((res) => {
-					// 			return res;
-					// 		}).catch((err) => {
-					// 			return err;
-					// 		});
-					// }
-					// if(eve.request.method == "PUT") {
-					// 	return chai.request(server)
-					// 			   .put(eve.request.url)
-					// 			   .set(eve.request.headers)
-					// 			   .send(eve.request.body)
-					// 			   .then((res) => {
-					// 			   		return res;
-					// 			   }).catch((err) => {
-					// 			   		return err;
-					// 			   });
-					// }
+					if (eve.request.method == "POST") {
+						return chai.request(server)
+							.post(eve.request.url)
+							.set(eve.request.headers)
+							.send(eve.request.body)
+							.then((res) => {
+								return res;
+							}).catch((err) => {
+								return err;
+							});
+						// }
+						// if(eve.request.method == "PUT") {
+						// 	return chai.request(server)
+						// 			   .put(eve.request.url)
+						// 			   .set(eve.request.headers)
+						// 			   .send(eve.request.body)
+						// 			   .then((res) => {
+						// 			   		return res;
+						// 			   }).catch((err) => {
+						// 			   		return err;
+						// 			   });
+					}
 
 
 				}).then((results) => {
@@ -89,14 +93,14 @@ describe('git_test ', function() {
 						// 	if(e.response.status_code == 404) {
 						// 		continue;
 						// 	}
-		 				// 	expect(ar2.length).to.equal(ar1.length);
+						// 	expect(ar2.length).to.equal(ar1.length);
 						// 	for (let k = 0; k < ar1.length; k++) {
 						// 		expect(ar2[k]).to.deep.equal(ar1[k]);
 						// 	}
 						// }
-						// if (e.request.method == "POST") {
-						// 	expect(results[j].status).to.equal(e.response.status_code);
-						// }
+						if (e.request.method == "POST") {
+							expect(results[j].status).to.equal(e.response.status_code);
+						}
 						if (e.request.method == "DELETE") {
 							expect(results[j].status).to.equal(e.response.status_code);
 						}
@@ -113,6 +117,6 @@ describe('git_test ', function() {
 		}
 	})
 });
-after(async () =>{
-await closeConnection(sequelize)
+after(async () => {
+	await closeConnection(sequelize)
 })

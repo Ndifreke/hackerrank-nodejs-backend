@@ -7,18 +7,18 @@ module.exports.closeConnection = async function (sequelize) {
 }
 
 const actorData = {
-  id: 3466404,
+  id: 23,
   login: "khunt",
   avatar_url: "https://avatars.com/3466404",
   repo: {
-    id: 478747,
+    id: 47,
     name: "ngriffin/rerum-aliquam-cum",
     url: "https://github.com/ngriffin/rerum-aliquam-cum",
     created_at: "2013-04-17 04:13:31"
   },
   event: {
     type: "Pull Request",
-    id: 987932
+    id: 98
   }
 }
 
