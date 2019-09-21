@@ -1,6 +1,6 @@
 var chai = require('chai');
 var expect = chai.expect;
-const { data, createActor, createEvent, createRepository } = require("../data/seeds")
+const { data, createActor, createEvent, createRepository } = require("../helper")
 const { closeConnection } = require("../helper")
 
 const { actors, events, repositories, sequelize } = require("../../models/index")
