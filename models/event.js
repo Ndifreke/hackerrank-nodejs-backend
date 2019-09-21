@@ -15,6 +15,14 @@ const eventModel = (sequelize, DataTypes) => {
     type: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    repository_id: {
+      type: DataTypes.BIGINT,
+      references: {
+        model: 'repositories',
+        key: "id",
+      },
+      allowNull: false,
     }
   };
 
@@ -32,14 +40,14 @@ const eventModel = (sequelize, DataTypes) => {
       foreignKey: "actor_id",
       target: "id",
       onDelete: "CASCADE",
-      onUpdate: "CASCADE"
+      onUpdate: "CASCADE",
     });
 
     event.belongsTo(db.repositories, {
       foreignKey: "repository_id",
       target: "id",
       onDelete: "CASCADE",
-      onUpdate: "CASCADE"
+      onUpdate: "CASCADE",
     });
   }
   return event;
