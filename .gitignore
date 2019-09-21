@@ -15,6 +15,7 @@ buildNumber.properties
 
 # Node
 unit.xml
+*.db
 
 # Logs
 logs
