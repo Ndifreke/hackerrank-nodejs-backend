@@ -6,5 +6,5 @@ const { event } = require("../controllers/index")
 // Routes related to event
 
 router.post("/", event.addEvent)
-
+router.get("/", event.getAllEvents)
 module.exports = router;

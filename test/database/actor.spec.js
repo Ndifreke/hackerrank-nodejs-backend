@@ -11,17 +11,17 @@ beforeEach(async function () {
 
 describe("actor database", function () {
   it("should create an actor entry", async function () {
-    const repo = await createActor(actors, data)
+    const repo = await createActor(actors, data.actor)
     expect(repo.created).to.be.true
   })
 
   it("should delete an actor", async function () {
-    const repo = await createActor(actors, data)
+    const repo = await createActor(actors, data.actor)
     if(!repo.created){
       throw new Error(repo.message)
     }
     const deleteCount = await actors.destroy({
-      where: { id: data.id },
+      where: { id: data.actor.id },
       cascade: true
     })
     expect(deleteCount).to.equal(1)

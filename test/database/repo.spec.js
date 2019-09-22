@@ -10,8 +10,7 @@ beforeEach(async function () {
 
 describe("create repository", function () {
   it("should create a git repository", async function () {
-    await createActor(actors, data)
-    data.repo.actor_id = data.id
+    await createActor(actors, data.actor)
     const result = await createRepository(repositories, data.repo)
     expect(result.created).to.be.true
   })
