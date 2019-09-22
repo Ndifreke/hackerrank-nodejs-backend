@@ -23,12 +23,17 @@ const eventModel = (sequelize, DataTypes) => {
         key: "id",
       },
       allowNull: false,
+    },
+    created_at:{
+      type: DataTypes.DATE,
+      allowNull: false
     }
   };
 
   const event = sequelize.define("events", eventSchema, {
     freezeTableName: true,
     timestamps: false,
+    underscored: true,
     hooks: {
       beforeCreate: (event, options) => {
       }
@@ -41,10 +46,12 @@ const eventModel = (sequelize, DataTypes) => {
       target: "id",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",
+      as: "actor"
     });
 
     event.belongsTo(db.repositories, {
       foreignKey: "repository_id",
+      as:"repo",
       target: "id",
       onDelete: "CASCADE",
       onUpdate: "CASCADE",

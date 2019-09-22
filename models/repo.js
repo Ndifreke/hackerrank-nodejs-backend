@@ -31,6 +31,7 @@ const repositoryModel = (sequelize, DataTypes) => {
   const repo = sequelize.define("repositories", repositorySchema, {
     freezeTableName: true,
     timestamps: false,
+    underscored: true,
     hooks: {
       beforeCreate: (actor, options) => {
         return actor;

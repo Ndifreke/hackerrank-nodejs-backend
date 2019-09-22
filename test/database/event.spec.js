@@ -10,12 +10,9 @@ beforeEach(async function () {
 })
 
 const addEvent = async () => {
-  await createActor(actors, data)
-  data.repo.actor_id = data.id
+  await createActor(actors, data.actor)
   await createRepository(repositories, data.repo)
-  data.event.repository_id = data.repo.id
-  data.event.actor_id = data.id
-  return await createEvent(events, data.event)
+  return await createEvent(events, data)
 }
 
 describe("event database", function () {
@@ -28,7 +25,7 @@ describe("event database", function () {
     const result = await addEvent()
     expect(result.created).to.be.true
     const deleteActorCount = await actors.destroy({
-      where: { id: data.id },
+      where: { id: data.actor.id },
       cascade: true
     })
     expect(deleteActorCount).to.equal(1)

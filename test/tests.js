@@ -16,15 +16,15 @@ const testFolder = './test/data';
 let testCaseNames = fs.readFileSync(dir + 'description.txt', 'utf8').toString().split('\n');
 
 beforeEach(async function () {
-	await sequelize.sync({ force: true })
+	// await sequelize.sync({ force: true })
 })
 
 describe('git_test ', function () {
 
 	this.timeout(120*1000);
-	// setTimeout(() => {
-	// 	process.exit(0)
-	// }, 10000)
+	setTimeout(() => {
+		process.exit(0)
+	}, 10000)
 
 	let id = 0;
 	fs.readdirSync(testFolder).sort().forEach(file => {
@@ -50,15 +50,15 @@ describe('git_test ', function () {
 								return err;
 							});
 					}
-					// if (eve.request.method == "GET") {
-					// 	return chai.request(server)
-					// 		.get(eve.request.url)
-					// 		.then((res) => {
-					// 			return res;
-					// 		}).catch((err) => {
-					// 			return err;
-					// 		});
-					// }
+					if (eve.request.method == "GET") {
+						return chai.request(server)
+							.get(eve.request.url)
+							.then((res) => {
+								return res;
+							}).catch((err) => {
+								return err;
+							});
+					}
 					if (eve.request.method == "POST") {
 						return chai.request(server)
 							.post(eve.request.url)
@@ -69,44 +69,44 @@ describe('git_test ', function () {
 							}).catch((err) => {
 								return err;
 							});
-						// }
-						// if(eve.request.method == "PUT") {
-						// 	return chai.request(server)
-						// 			   .put(eve.request.url)
-						// 			   .set(eve.request.headers)
-						// 			   .send(eve.request.body)
-						// 			   .then((res) => {
-						// 			   		return res;
-						// 			   }).catch((err) => {
-						// 			   		return err;
-						// 			   });
+						}
+						if(eve.request.method == "PUT") {
+							return chai.request(server)
+									   .put(eve.request.url)
+									   .set(eve.request.headers)
+									   .send(eve.request.body)
+									   .then((res) => {
+									   		return res;
+									   }).catch((err) => {
+									   		return err;
+									   });
 					}
 
 
-				}).then((results) => {
+				}).then((results) => { 
 					for (let j = 0; j < results.length; j++) {
 						let e = JSON.parse(event[j]);
-						// if(e.request.method == "GET") {
-						// 	results[j].should.have.status(e.response.status_code);
-						// 	let ar1 = results[j].body;
-						// 	let ar2 = e.response.body;
-						// 	if(e.response.status_code == 404) {
-						// 		continue;
-						// 	}
-						// 	expect(ar2.length).to.equal(ar1.length);
-						// 	for (let k = 0; k < ar1.length; k++) {
-						// 		expect(ar2[k]).to.deep.equal(ar1[k]);
-						// 	}
-						// }
+						if(e.request.method == "GET") {
+							results[j].should.have.status(e.response.status_code);
+							let ar1 = results[j].body;
+							let ar2 = e.response.body;
+							if(e.response.status_code == 404) {
+								continue;
+							}
+							expect(ar2.length).to.equal(ar1.length);
+							for (let k = 0; k < ar1.length; k++) {
+								expect(ar2[k]).to.deep.equal(ar1[k]);
+							}
+						}
 						if (e.request.method == "POST") {
 							expect(results[j].status).to.equal(e.response.status_code);
 						}
 						if (e.request.method == "DELETE") {
 							expect(results[j].status).to.equal(e.response.status_code);
 						}
-						// if (e.request.method == "PUT") {
-						// 	expect(results[j].status).to.equal(e.response.status_code);
-						// }
+						if (e.request.method == "PUT") {
+							expect(results[j].status).to.equal(e.response.status_code);
+						}
 					}
 					done();
 				}).catch((err) => {
