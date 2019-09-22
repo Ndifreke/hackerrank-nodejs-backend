@@ -46,7 +46,7 @@ sequelize
 const truncateAll = async (sequelize) => {
   // try {
   //   await sequelize.query("SET FOREIGN_KEY_CHECKS = 0")
-    await sequelize.sync({ force: true });
+   // await sequelize.sync({ force: true });
   //   await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
   //   console.log("Table Truncated")
   // } catch (err) {
