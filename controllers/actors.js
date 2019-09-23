@@ -1,8 +1,17 @@
 
-const { actors } = require("../models")
+const { actors, sequelize } = require("../models")
 
-var getAllActors = () => {
-
+var getAllActors = async (req, resp) => {
+	const sql =
+	`SELECT DISTINCT a.login, a.avatar_url 
+		 FROM actors a 
+		 LEFT JOIN events e 
+		 ON a.id = e.actor_id 
+		 GROUP BY a.login, a.avatar_url 
+		 ORDER BY COUNT(e.actor_id) DESC, a.login ASC`
+	const res = await sequelize.query(sql)
+	resp.json(res[0])
+	// console.log(Object.keys(res[0]))
 };
 
 const fetchActor = async (id, actorModel) => {

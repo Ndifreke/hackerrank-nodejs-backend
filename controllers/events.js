@@ -51,8 +51,8 @@ var addEvent = async (req, resp, next) => {
 	const { id, type, created_at, actor: actorData, repo: repoData } = req.body;
 	try {
 		//console.log(req.body)
-		await addActor(actors, actorData)
-		await addRepository(repositories, { ...repoData, actor_id: actorData.id })
+		console.log(await addActor(actors, actorData))
+		console.log(await addRepository(repositories, { ...repoData, actor_id: actorData.id }))
 
 		const dt = new Date(created_at)
 		dt.setHours(dt.getHours() + 1)
