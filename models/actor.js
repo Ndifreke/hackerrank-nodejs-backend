@@ -9,7 +9,8 @@ const actorModel = (sequelize, DataTypes) => {
     },
     login: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     avatar_url: {
       type: DataTypes.STRING,
