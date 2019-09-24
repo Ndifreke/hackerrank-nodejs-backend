@@ -51,8 +51,8 @@ var addEvent = async (req, resp, next) => {
 	const { id, type, created_at, actor: actorData, repo: repoData } = req.body;
 	try {
 		//console.log(req.body)
-		console.log(await addActor(actors, actorData))
-		console.log(await addRepository(repositories, { ...repoData, actor_id: actorData.id }))
+		await addActor(actors, actorData)
+		await addRepository(repositories, { ...repoData, actor_id: actorData.id })
 
 		const dt = new Date(created_at)
 		dt.setHours(dt.getHours() + 1)
@@ -64,7 +64,7 @@ var addEvent = async (req, resp, next) => {
 			repository_id: repoData.id,
 			created_at: dt
 		})
-		
+
 		if (result.created) {
 			resp.statusCode = 201
 		} else {
@@ -73,8 +73,8 @@ var addEvent = async (req, resp, next) => {
 		}
 	} catch (e) {
 		//internal server Error
-		resp.statusCode = 500
-		next(req, resp)
+		resp.statusCode = 400
+		resp.end()
 	}
 	resp.end()
 
@@ -107,7 +107,7 @@ var eraseEvents = async (req, resp, next) => {
 		resp.end()
 	} catch (e) {
 		//internal server Error
-		console.log(e)
+		console.log(__filename, e)
 		resp.statusCode = 500
 		next(req, resp)
 	}

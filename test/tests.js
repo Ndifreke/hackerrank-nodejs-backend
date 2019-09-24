@@ -22,9 +22,9 @@ beforeEach(async function () {
 describe('git_test ', function () {
 
 	this.timeout(120*1000);
-	setTimeout(() => {
-		process.exit(0)
-	}, 10000)
+	// setTimeout(() => {
+	// 	process.exit(0)
+	// }, 10000)
 
 	let id = 0;
 	fs.readdirSync(testFolder).sort().forEach(file => {
