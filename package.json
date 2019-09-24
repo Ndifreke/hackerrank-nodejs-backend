@@ -6,8 +6,8 @@
     "prestart": "npm install",
     "start": "node ./bin/www",
     "pretest": "npm install",
-    "test": "./node_modules/.bin/mocha test/index",
-    "test:dev": "./node_modules/.bin/mocha test/index",
+    "test": "./node_modules/.bin/mocha --timeout 10000 test/index",
+    "test:dev": "./node_modules/.bin/mocha --timeout 10000 test/index",
     "nodemon": "nodemon ./bin/www"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "constantinople": "^4.0.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jade": "^1.11.0",
     "jsonfile": "^3.0.1",

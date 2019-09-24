@@ -10,6 +10,7 @@ beforeEach(async function () {
 })
 
 describe("actor database", function () {
+
   it("should create an actor entry", async function () {
     const repo = await createActor(actors, data.actor)
     expect(repo.created).to.be.true
@@ -29,6 +30,6 @@ describe("actor database", function () {
 })
 
 after(async function () {
-  closeConnection(sequelize)
+ closeConnection(sequelize)
 })
 

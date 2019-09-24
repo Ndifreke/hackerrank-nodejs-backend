@@ -5,7 +5,9 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')["dev"];
+let config = require("../config/config")
+
+config = config[env];
 const db = {};
 
 let sequelize;
@@ -46,7 +48,7 @@ sequelize
 const truncateAll = async (sequelize) => {
   // try {
   //   await sequelize.query("SET FOREIGN_KEY_CHECKS = 0")
-   // await sequelize.sync({ force: true });
+  // await sequelize.sync({ force: true });
   //   await sequelize.query("SET FOREIGN_KEY_CHECKS = 1");
   //   console.log("Table Truncated")
   // } catch (err) {
