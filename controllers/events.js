@@ -48,22 +48,24 @@ const createEvent = async (eventsModel, data) => {
 }
 
 var addEvent = async (req, resp, next) => {
-	const { id, type, created_at, actor: actorData, repo: repoData } = req.body;
-	try {
-		//console.log(req.body)
-		await addActor(actors, actorData)
-		await addRepository(repositories, { ...repoData, actor_id: actorData.id })
+	for (eventItem of req.body) {
 
-		const dt = new Date(created_at)
-		dt.setHours(dt.getHours() + 1)
-		//to create an event, you need a repo and actor id
-		const result = await createEvent(events, {
-			id,
-			type,
-			actor_id: actorData.id,
-			repository_id: repoData.id,
-			created_at: dt
-		})
+		const { id, type, created_at, actor: actorData, repo: repoData } = eventItem;
+		console.log(eventItem)
+		try {
+			await addActor(actors, actorData)
+			await addRepository(repositories, { ...repoData, actor_id: actorData.id })
+
+			const dt = new Date(created_at)
+			dt.setHours(dt.getHours() + 1)
+			//to create an event, you need a repo and actor id
+			const result = await createEvent(events, {
+				id,
+				type,
+				actor_id: actorData.id,
+				repository_id: repoData.id,
+				created_at: dt
+			})
 
 		if (result.created) {
 			resp.statusCode = 201
@@ -74,8 +76,9 @@ var addEvent = async (req, resp, next) => {
 	} catch (e) {
 		//internal server Error
 		resp.statusCode = 400
-		resp.end()
+	//	resp.end()
 	}
+}
 	resp.end()
 
 };
@@ -114,6 +117,7 @@ var eraseEvents = async (req, resp, next) => {
 };
 
 module.exports = {
+	fetchEvents,
 	getAllEvents: getAllEvents,
 	addEvent: addEvent,
 	getByActor: getByActor,
